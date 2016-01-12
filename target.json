@@ -1,6 +1,6 @@
 {
   "name": "wrd-watch-gcc",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Target description for the ARM mbed Wearable Reference Design Watch using GCC.",
   "licenses": [
     {
