@@ -1,0 +1,201 @@
+{
+  "name": "wrd-watch-gcc",
+  "version": "0.0.0",
+  "description": "Target description for the ARM mbed Wearable Reference Design Watch using GCC.",
+  "licenses": [
+    {
+      "url": "https://spdx.org/licenses/Apache-2.0",
+      "type": "Apache-2.0"
+    }
+  ],
+  "inherits": {
+    "mbed-gcc": "^1.1.0"
+  },
+  "keywords": [
+    "mbed-target:wrd-watch",
+    "mbed-official",
+    "efm32gg",
+    "watch",
+    "gcc"
+  ],
+  "similarTo": [
+    "max1704",
+    "framebuffer-1bit",
+    "matrixlcd-sharp",
+    "watch",
+    "efm32gg-stk",
+    "efm32gg",
+    "efm32",
+    "silabs",
+    "cortex-m3",
+    "armv7-m",
+    "arm",
+    "gcc",
+    "swo"
+  ],
+  "config": {
+    "cmsis": {
+      "nvic": {
+        "ram_vector_address": "(&__start_vector_table__)",
+        "flash_vector_address": "0x0",
+        "user_irq_offset": 16,
+        "user_irq_number": 39
+      }
+    },
+    "uvisor": {
+      "present": false
+    },
+    "minar": {
+      "stats": true
+    },
+    "hardware": {
+      "clock": {
+        "core": {
+          "source": "HFXO",
+          "frequency": 48000000
+        },
+        "low-energy": {
+          "source": "LFXO",
+          "frequency": 32768
+        }
+      },
+      "pins": {
+        "LED0": "NC",
+        "LED1": "NC",
+        "LED2": "NC",
+        "LED3": "NC",
+        "LED4": "NC",
+        "UART_TX": "NC",
+        "UART_RX": "NC",
+        "SERIAL_TX": "NC",
+        "SERIAL_RX": "NC",
+        "STDIO_UART_TX": "NC",
+        "STDIO_UART_RX": "NC",
+        "USBTX": "NC",
+        "USBRX": "NC",
+        "EFM_BC_EN": "NC"
+      },
+      "test-pins": {
+        "spi": {
+          "MOSI": "NC",
+          "MISO": "NC",
+          "SCLK": "NC",
+          "SSEL": "NC"
+        },
+        "i2c": {
+          "SDA": "NC",
+          "SCL": "NC"
+        }
+      },
+      "lesense": {
+        "port": "gpioPortC",
+        "total-channels": 16
+      },
+      "wearable-reference-design": {
+        "battery": {
+          "present": true,
+          "capacity": 140000,
+          "estimated-current": 100
+        },
+        "battery-gauge": {
+          "present": true,
+          "i2c": {
+            "sda": "PD14",
+            "scl": "PD15"
+          },
+          "pin": {
+            "irq": "NC"
+          }
+        },
+        "bit-band": {
+          "present": true,
+          "ram-base": "0x20000000UL",
+          "bit-band-base": "0x22000000UL"
+        },
+        "bluetooth-le": {
+          "present": true,
+          "spi": {
+            "mosi": "PC11",
+            "miso": "PC10",
+            "clk": "PC9",
+            "cs": "PC14"
+          },
+          "pin": {
+            "nrdy": "PD10",
+            "nreq": "PD11"
+          }
+        },
+        "button": {
+          "present": true,
+          "forward": "PC15"
+        },
+        "output-compare": {
+          "present": true
+        },
+        "screen": {
+          "present": true,
+          "spi": {
+            "mosi": "PD0",
+            "miso": "NC",
+            "clk": "PD2",
+            "cs": "PA11"
+          },
+          "pin": {
+            "enable": "PD1",
+            "refresh": "PB12"
+          }
+        },
+        "touch": {
+          "present": true,
+          "slider-1": 1,
+          "slider-2": 3,
+          "slider-3": 0,
+          "slider-4": 2,
+          "slider-back": 4,
+          "channels-in-use": 5,
+          "sensitivity": 97,
+          "sample-delay": 90,
+          "calibration-values": 10,
+          "scan-frequency-low": 20,
+          "scan-frequency-high": 20
+        },
+        "vibration-motor": {
+          "present": true,
+          "pin": {
+            "enable": "PA10"
+          }
+        },
+        "watchdog": {
+          "present": true,
+          "enabled": 1
+        }
+      }
+    },
+    "modules": {
+      "analogin": {
+        "size": 1
+      },
+      "analogout": {
+        "size": 1
+      },
+      "gpio": {
+        "size": 1
+      },
+      "i2c": {
+        "size": 2
+      },
+      "pwmout": {
+        "size": 1
+      },
+      "serial": {
+        "size": 7,
+        "stdio-uart": "UART0"
+      },
+      "spi": {
+        "size": 3,
+        "transaction-queue-size": 4
+      }
+    }
+  },
+  "toolchain": "CMake/toolchain.cmake"
+}
