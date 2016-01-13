@@ -127,7 +127,9 @@
         },
         "button": {
           "present": true,
-          "forward": "PC15"
+          "pin": {
+            "forward": "PC15"
+          }
         },
         "output-compare": {
           "present": true
