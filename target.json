@@ -97,6 +97,9 @@
           "capacity": 140000,
           "estimated-current": 100
         },
+        "battery-backup": {
+          "present": true
+        },
         "battery-gauge": {
           "present": true,
           "i2c": {
@@ -131,8 +134,76 @@
             "forward": "PC15"
           }
         },
+        "buzzer": {
+          "present": true,
+          "pin": {
+            "enable": "PA8"
+          }
+        },
+        "external-gpio": {
+          "present": true,
+          "i2c": {
+            "sda": "PD14",
+            "scl": "PD15"
+          },
+          "pin": {
+            "irq1": "PB6",
+            "irq2": "PF3"
+          }
+        },
+        "external-sram": {
+          "present": true,
+          "pin": {
+            "cs": "PD9",
+            "write-enable": "PF4",
+            "output-enable": "PF5"
+          }
+        },
+        "gps": {
+          "present": true,
+          "spi": {
+            "mosi": "PC11",
+            "miso": "PC10",
+            "clk": "PC9",
+            "cs": "PD7"
+          },
+          "uart": {
+            "tx": "PF6",
+            "rx": "PF7"
+          },
+          "pin": {
+            "timepulse": "PA9"
+          }
+        },
+        "micro-sd": {
+          "present": true,
+          "pin": {
+            "cs": "PF9"
+          }
+        },
+        "nfc": {
+          "present": true,
+          "pin": {
+            "irq": "PA7"
+          }
+        },
         "output-compare": {
           "present": true
+        },
+        "rfid": {
+          "present": true,
+          "pin": {
+            "modulator": "PB11",
+            "envelope": "PC5",
+            "clock": "PF8"
+          }
+        },
+        "rgb-led": {
+          "present": true,
+          "i2c": {
+            "sda": "PD14",
+            "scl": "PD15"
+          }
         },
         "screen": {
           "present": true,
@@ -147,13 +218,57 @@
             "refresh": "PB12"
           }
         },
+        "sensor-battery-current": {
+          "present": true,
+          "pin": {
+            "adc": "PD4"
+          }
+        },
+        "sensor-battery-charging-current": {
+          "present": true,
+          "pin": {
+            "adc": "PD6"
+          }
+        },
+        "sensor-battery-voltage": {
+          "present": true,
+          "pin": {
+            "adc": "PD5"
+          }
+        },
+        "sensor-fingerprint": {
+          "present": true,
+          "spi": {
+            "mosi": "PB3",
+            "miso": "PB4",
+            "clk": "PB5",
+            "cs": "PF12"
+          },
+          "pin": {
+            "nrdy": "PD12",
+            "nreq": "PD13"
+          }
+        },
+        "sensor-temperature": {
+          "present": true,
+          "pin": {
+            "enable": "PB15",
+            "adc": "PD3"
+          }
+        },
+        "swo": {
+          "present": true,
+          "enabled": false
+        },
         "touch": {
           "present": true,
           "slider-1": 1,
           "slider-2": 3,
           "slider-3": 0,
           "slider-4": 2,
+          "slider-top": 12,
           "slider-back": 4,
+          "slider-bottom": 13,
           "channels-in-use": 5,
           "sensitivity": 97,
           "sample-delay": 90,
@@ -163,13 +278,14 @@
         },
         "vibration-motor": {
           "present": true,
+          "pulse-width-unit-us": 200,
           "pin": {
             "enable": "PA10"
           }
         },
         "watchdog": {
           "present": true,
-          "enabled": 1
+          "enabled": true
         }
       }
     },
