@@ -21,7 +21,8 @@
   "similarTo": [
     "max1704",
     "framebuffer-1bit",
-    "matrixlcd-sharp",
+    "matrixlcd-sharp-1bit",
+    "onsemi-ncp5623c",
     "watch",
     "efm32gg-stk",
     "efm32gg",
@@ -218,6 +219,16 @@
             "refresh": "PB12"
           }
         },
+        "sensor-accelerometer": {
+          "present": true,
+          "i2c": {
+            "sda": "PD14",
+            "scl": "PD15"
+          },
+          "pin": {
+            "irq": "NC"
+          }
+        },
         "sensor-battery-current": {
           "present": true,
           "pin": {
@@ -277,7 +288,7 @@
           "scan-frequency-high": 20
         },
         "vibration-motor": {
-          "present": true,
+          "present": false,
           "pulse-width-unit-us": 200,
           "pin": {
             "enable": "PA10"
