@@ -23,6 +23,7 @@
     "framebuffer-1bit",
     "matrixlcd-sharp-1bit",
     "onsemi-ncp5623c",
+    "nxp-pcal64",
     "watch",
     "efm32gg-stk",
     "efm32gg",
@@ -46,6 +47,11 @@
     "uvisor": {
       "present": false
     },
+    "mbed-os": {
+      "stdio": {
+        "default-baud": 115200
+      }
+    },
     "minar": {
       "stats": true
     },
@@ -66,14 +72,14 @@
         "LED2": "NC",
         "LED3": "NC",
         "LED4": "NC",
-        "UART_TX": "NC",
-        "UART_RX": "NC",
-        "SERIAL_TX": "NC",
-        "SERIAL_RX": "NC",
-        "STDIO_UART_TX": "NC",
-        "STDIO_UART_RX": "NC",
-        "USBTX": "NC",
-        "USBRX": "NC",
+        "USBTX": "PB3",
+        "USBRX": "PB4",
+        "UART_TX": "USBTX",
+        "UART_RX": "USBRX",
+        "SERIAL_TX": "USBTX",
+        "SERIAL_RX": "USBRX",
+        "STDIO_UART_TX": "USBTX",
+        "STDIO_UART_RX": "USBRX",
         "EFM_BC_EN": "NC"
       },
       "test-pins": {
@@ -104,8 +110,7 @@
         "battery-gauge": {
           "present": true,
           "i2c": {
-            "sda": "PD14",
-            "scl": "PD15"
+            "name": "i2c0"
           },
           "pin": {
             "irq": "NC"
@@ -119,9 +124,7 @@
         "bluetooth-le": {
           "present": true,
           "spi": {
-            "mosi": "PC11",
-            "miso": "PC10",
-            "clk": "PC9",
+            "name": "spi0",
             "cs": "PC14"
           },
           "pin": {
@@ -144,8 +147,7 @@
         "external-gpio": {
           "present": true,
           "i2c": {
-            "sda": "PD14",
-            "scl": "PD15"
+            "name": "i2c0"
           },
           "pin": {
             "irq1": "PB6",
@@ -176,6 +178,37 @@
             "timepulse": "PA9"
           }
         },
+        "interface": {
+          "i2c": {
+            "size": 1,
+            "i2c0": {
+              "name": "i2c0",
+              "sda": "PD14",
+              "scl": "PD15"
+            }
+          },
+          "spi": {
+            "size": 3,
+            "spi0": {
+              "name": "spi0",
+              "mosi": "PC11",
+              "miso": "PC10",
+              "sclk": "PC9"
+            },
+            "spi1": {
+              "name": "spi1",
+              "mosi": "PD0",
+              "miso": "NC",
+              "sclk": "PD2"
+            },
+            "spi2": {
+              "name": "spi2",
+              "mosi": "PB3",
+              "miso": "PB4",
+              "sclk": "PB5"
+            }
+          }
+        },
         "micro-sd": {
           "present": true,
           "pin": {
@@ -200,18 +233,15 @@
           }
         },
         "rgb-led": {
-          "present": true,
+          "present": false,
           "i2c": {
-            "sda": "PD14",
-            "scl": "PD15"
+            "name": "i2c0"
           }
         },
         "screen": {
           "present": true,
           "spi": {
-            "mosi": "PD0",
-            "miso": "NC",
-            "clk": "PD2",
+            "name": "spi1",
             "cs": "PA11"
           },
           "pin": {
@@ -222,11 +252,29 @@
         "sensor-accelerometer": {
           "present": true,
           "i2c": {
-            "sda": "PD14",
-            "scl": "PD15"
+            "name": "i2c0"
           },
-          "pin": {
-            "irq": "NC"
+          "enable": {
+            "location": "0x42",
+            "pin": 5
+          },
+          "irq": {
+            "location": "0x42",
+            "pin": 9
+          }
+        },
+        "sensor-gyroscope": {
+          "present": true,
+          "i2c": {
+            "name": "i2c0"
+          },
+          "enable": {
+            "location": "0x42",
+            "pin": 5
+          },
+          "irq": {
+            "location": "0x42",
+            "pin": 12
           }
         },
         "sensor-battery-current": {
@@ -288,7 +336,7 @@
           "scan-frequency-high": 20
         },
         "vibration-motor": {
-          "present": false,
+          "present": true,
           "pulse-width-unit-us": 200,
           "pin": {
             "enable": "PA10"
