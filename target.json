@@ -20,10 +20,14 @@
   ],
   "similarTo": [
     "max1704",
+    "nxp-pcal64",
+    "wrd-ui",
     "framebuffer-1bit",
     "matrixlcd-sharp-1bit",
+    "wrd-rgb-led",
     "onsemi-ncp5623c",
-    "nxp-pcal64",
+    "wrd-vibration-motor",
+    "wrd-touch",
     "watch",
     "efm32gg-stk",
     "efm32gg",
@@ -233,9 +237,13 @@
           }
         },
         "rgb-led": {
-          "present": false,
+          "present": true,
           "i2c": {
             "name": "i2c0"
+          },
+          "enable": {
+            "location": "0x42",
+            "pin": 0
           }
         },
         "screen": {
