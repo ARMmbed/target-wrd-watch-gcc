@@ -9,7 +9,7 @@
     }
   ],
   "inherits": {
-    "mbed-gcc": "^1.1.0"
+    "efm32gg-gcc": "^1.0.0"
   },
   "keywords": [
     "mbed-target:wrd-watch",
@@ -19,6 +19,7 @@
     "gcc"
   ],
   "similarTo": [
+    "message-center-transport-spi-master",
     "max1704",
     "nxp-pcal64",
     "wrd-ui",
@@ -28,6 +29,7 @@
     "onsemi-ncp5623c",
     "wrd-vibration-motor",
     "wrd-touch",
+    "bosch-bmx055",
     "watch",
     "efm32gg-stk",
     "efm32gg",
@@ -40,26 +42,10 @@
     "swo"
   ],
   "config": {
-    "cmsis": {
-      "nvic": {
-        "ram_vector_address": "(&__start_vector_table__)",
-        "flash_vector_address": "0x0",
-        "user_irq_offset": 16,
-        "user_irq_number": 39
-      }
-    },
-    "uvisor": {
-      "present": false
-    },
-    "mbed-os": {
-      "stdio": {
-        "default-baud": 115200
-      }
-    },
-    "minar": {
-      "stats": true
-    },
     "hardware": {
+      "device": "EFM32GG995F1024",
+      "flash-size": 1024,
+      "ram-size": 128,
       "clock": {
         "core": {
           "source": "HFXO",
@@ -102,7 +88,7 @@
         "port": "gpioPortC",
         "total-channels": 16
       },
-      "wearable-reference-design": {
+      "wrd": {
         "battery": {
           "present": true,
           "capacity": 140000,
@@ -114,10 +100,12 @@
         "battery-gauge": {
           "present": true,
           "i2c": {
-            "name": "i2c0"
+            "sda": "PD14",
+            "scl": "PD15"
           },
-          "pin": {
-            "irq": "NC"
+          "irq": {
+            "pin": 11,
+            "location": "0x40"
           }
         },
         "bit-band": {
@@ -131,31 +119,32 @@
             "name": "spi0",
             "cs": "PC14"
           },
-          "pin": {
-            "nrdy": "PD10",
-            "nreq": "PD11"
+          "enable": {
+            "pin": 10,
+            "location": "0x42"
+          },
+          "nrdy": {
+            "pin": "PD10",
+            "location": 0
+          },
+          "nreq": {
+            "pin": "PD11",
+            "location": 0
           }
         },
         "button": {
           "present": true,
-          "pin": {
-            "forward": "PC15"
+          "size": 1,
+          "button0": {
+            "pin": "PC15",
+            "location": 0
           }
         },
         "buzzer": {
           "present": true,
-          "pin": {
-            "enable": "PA8"
-          }
-        },
-        "external-gpio": {
-          "present": true,
-          "i2c": {
-            "name": "i2c0"
-          },
-          "pin": {
-            "irq1": "PB6",
-            "irq2": "PF3"
+          "enable": {
+            "pin": "PA8",
+            "location": 0
           }
         },
         "external-sram": {
@@ -164,6 +153,30 @@
             "cs": "PD9",
             "write-enable": "PF4",
             "output-enable": "PF5"
+          }
+        },
+        "gpio-expander": {
+          "present": true,
+          "size": 2,
+          "gpio0": {
+            "i2c": {
+              "sda": "PD14",
+              "scl": "PD15",
+              "address": "0x40"
+            },
+            "irq": {
+              "pin": "PF3"
+            }
+          },
+          "gpio1": {
+            "i2c": {
+              "sda": "PD14",
+              "scl": "PD15",
+              "address": "0x42"
+            },
+            "irq": {
+              "pin": "PB6"
+            }
           }
         },
         "gps": {
@@ -178,18 +191,22 @@
             "tx": "PF6",
             "rx": "PF7"
           },
-          "pin": {
-            "timepulse": "PA9"
+          "enable": {
+            "pin": 13,
+            "location": "0x42"
+          },
+          "backup": {
+            "pin": 11,
+            "location": "0x42"
+          },
+          "timepulse": {
+            "pin": "PA9",
+            "location": 0
           }
         },
         "interface": {
           "i2c": {
-            "size": 1,
-            "i2c0": {
-              "name": "i2c0",
-              "sda": "PD14",
-              "scl": "PD15"
-            }
+            "size": 0
           },
           "spi": {
             "size": 3,
@@ -213,10 +230,27 @@
             }
           }
         },
+        "led": {
+          "present": true,
+          "size": 1,
+          "led0": {
+            "pin": 6,
+            "location": "0x42"
+          }
+        },
         "micro-sd": {
           "present": true,
-          "pin": {
+          "spi": {
+            "name": "spi0",
             "cs": "PF9"
+          },
+          "power": {
+            "pin": 15,
+            "location": "0x40"
+          },
+          "enable": {
+            "pin": 13,
+            "location": "0x40"
           }
         },
         "nfc": {
@@ -239,7 +273,8 @@
         "rgb-led": {
           "present": true,
           "i2c": {
-            "name": "i2c0"
+            "sda": "PD14",
+            "scl": "PD15"
           },
           "enable": {
             "location": "0x42",
@@ -260,7 +295,8 @@
         "sensor-accelerometer": {
           "present": true,
           "i2c": {
-            "name": "i2c0"
+            "sda": "PD14",
+            "scl": "PD15"
           },
           "enable": {
             "location": "0x42",
@@ -274,7 +310,8 @@
         "sensor-gyroscope": {
           "present": true,
           "i2c": {
-            "name": "i2c0"
+            "sda": "PD14",
+            "scl": "PD15"
           },
           "enable": {
             "location": "0x42",
@@ -345,9 +382,11 @@
         },
         "vibration-motor": {
           "present": true,
-          "pulse-width-unit-us": 200,
-          "pin": {
-            "enable": "PA10"
+          "enable": {
+            "pwm": {
+              "pulse-width-unit-us": 10000,
+              "pin": "PA10"
+            }
           }
         },
         "watchdog": {
@@ -357,30 +396,25 @@
       }
     },
     "modules": {
-      "analogin": {
-        "size": 1
-      },
-      "analogout": {
-        "size": 1
-      },
-      "gpio": {
-        "size": 1
-      },
-      "i2c": {
-        "size": 2
-      },
-      "pwmout": {
-        "size": 1
-      },
       "serial": {
-        "size": 7,
         "stdio-uart": "UART0"
-      },
-      "spi": {
-        "size": 3,
-        "transaction-queue-size": 4
       }
     }
   },
-  "toolchain": "CMake/toolchain.cmake"
+  "scripts": {
+    "debug": [
+      "valinor",
+      "-t",
+      "uvision",
+      "--target",
+      "efm32gg-stk",
+      "$program"
+    ],
+    "test": [
+      "mbed_test_wrapper",
+      "--target",
+      "EFM32GG_STK3700",
+      "$program"
+    ]
+  }
 }
