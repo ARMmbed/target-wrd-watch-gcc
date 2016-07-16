@@ -62,8 +62,8 @@
         "LED2": "NC",
         "LED3": "NC",
         "LED4": "NC",
-        "USBTX": "PB3",
-        "USBRX": "PB4",
+        "USBTX": "NC",
+        "USBRX": "NC",
         "UART_TX": "USBTX",
         "UART_RX": "USBRX",
         "SERIAL_TX": "USBTX",
@@ -283,6 +283,10 @@
         },
         "screen": {
           "present": true,
+          "size": {
+            "width": 128,
+            "height": 128
+          },
           "spi": {
             "name": "spi1",
             "cs": "PA11"
